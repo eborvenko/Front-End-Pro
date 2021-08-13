@@ -2,19 +2,19 @@ console.log('/-------------функция rgb----------------------/');
 
 
 function rgb(red, green, blue) {
-    var _red = parseInt(red, 10);
+    var redVerification = parseInt(red, 10);
 
-    if (isNaN(_red)) _red = 0;
+    if (isNaN(redVerification)) redVerification = 0;
   
-    var _green = parseInt(green, 10);
+    var greenVerification = parseInt(green, 10);
 
-    if (isNaN(_green)) _green = 0;
+    if (isNaN(greenVerification)) greenVerification = 0;
   
-    var _blue = parseInt(blue, 10);
+    var blueVerification = parseInt(blue, 10);
 
-    if (isNaN(_blue)) _blue = 0;
+    if (isNaN(blueVerification)) blueVerification = 0;
   
-    return `rgb(${_red},${_green},${_blue})`;
+    return `rgb(${redVerification},${greenVerification},${blueVerification})`;
 }
   
 console.log('rgb() --> ', rgb());
