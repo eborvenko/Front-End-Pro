@@ -22,6 +22,7 @@ console.log('через циклы: maxArray([1, 8, 37, 5, 17]) --> ', maxArray(
 console.log('//////////');
 
 ///////// Вариант через рекурсию
+
 const maxRecursion = (arr) => {
 
     const findMaxValue = (arr, maxRecursion, idx = 0) => {
