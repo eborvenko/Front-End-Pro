@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style/main.css">
+    <title>Lesson_12</title>
+</head>
+<body>   
+    <input name="myInput" type="text">
+    <button>Add item's list</button>
+
+    <script>
+        const button = document.querySelector('button');
+        const input = document.querySelector('[name="myInput"]');
+        const ul = document.createElement("ul");
+
+        document.body.prepend(ul);        
+
+        button.addEventListener('click', () => {
+            const li = document.createElement('li');
+
+            if (!input.value ){
+
+                return
+            }
+
+            li.innerText = input.value;
+            input.value ='';
+
+            ul.append(li);            
+        })        
+    </script>
+</body>
+</html>
