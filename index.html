@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script async src="custom.js"></script>
+    <title>Lesson_13</title>
+</head>
+<body>    
+    <div class="wrap">
+        <form id="contactsForm" >
+            <table class="table">
+                <caption>Домашняя работа 14. Список контактов</caption>
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Номер телефона</th>
+                        <th>События</th>                    
+                    </tr>
+                </thead>
+
+                <tbody id="contactsList"></tbody>
+
+                <tfoot>
+                    <td>
+                        <input type="text" class="field" name="nameFirts">
+                    </td>
+                    <td>
+                        <input type="text" class="field" name="nameLast">
+                    </td>
+                    <td>
+                        <input type="text" class="field" name="phone">
+                    </td>
+                    <td class="cell-btn">
+                        <button id="button-add" class="button btn-add">Добавить</button>
+                    </td>
+                </tfoot>
+            </table>
+        </form>       
+    </div>  
+
+    <script type="text/template" id="contactsTemplate">
+    <tr class="contact-row">
+        <td>{{nameFirts}}</td>
+        <td>{{nameLast}}</td>
+        <td>{{phone}}</td>
+        <td class="cell-btn">
+            <button type="button" class="button btn-delete">Удалить</button>
+        </td>
+    </tr>
+    </script>
+
+</body>
+</html>
