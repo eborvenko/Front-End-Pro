@@ -1,50 +1,43 @@
 const todoInput = document.querySelector('.todo-input');
 const todoButton = document.querySelector('.todo-button');
 const todoList = document.querySelector('.todo-list');
+const template = document.querySelector('#listTemplate').innerHTML;
 
-todoButton.addEventListener('click', addTodo);
-todoList.addEventListener('click', deleteCheck);
+todoButton.addEventListener('click', onTodoButtonClick);
+todoList.addEventListener('click', onTodoListClick);
 
-function addTodo(e) {
+function onTodoButtonClick(e) {
     e.preventDefault();
 
-    const todoDiv = document.createElement('div');
-    const newTodo = document.createElement('li');
-    const completedButton = document.createElement('button');
-    const trashButton = document.createElement('button');
-
-    todoDiv.classList.add('todo');
-    newTodo.classList.add('todo-item');
-    completedButton.classList.add('complete-btn');
-    trashButton.classList.add('trash-btn');
-    
-    newTodo.innerText = todoInput.value;
-
     if (!todoInput.value){
-        return alert('fill in the field');
-    }   
+        alert('fill in the field');
+        return false;
+    } 
 
-    completedButton.innerHTML = '<i class="fas fa-check"></i>';
-    trashButton.innerHTML = '<i class="fas fa-trash"></i>';
+    addTodo(todoInput);
+    resetTodoInput();    
+}
 
-    todoDiv.appendChild(newTodo);
-    todoDiv.appendChild(completedButton);
-    todoDiv.appendChild(trashButton);
-    todoList.appendChild(todoDiv);    
+function addTodo(todoInput) {
+    const todoHTML = template.replace('{{text}}', todoInput.value);
 
+    todoList.insertAdjacentHTML('beforeend', todoHTML);
+}
+
+function  resetTodoInput() {
     todoInput.value = '';
 }
 
-function deleteCheck(e) {
+function onTodoListClick(e) {
     const item = e.target;
 
-    if (item.classList[0] === 'trash-btn') {
-        const todo = item.parentElement;
-        todo.remove();
+    if (item.classList.contains('trash-btn')) {
+        item.closest('.todo').remove();
     }
 
-    if (item.classList[0] === 'complete-btn'){
+    if (item.classList.contains('complete-btn')){
         const todo = item.parentElement;
+        
         todo.classList.toggle('completed');
     }
 }
