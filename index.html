@@ -4,33 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style/main.css">
-    <title>Lesson_12</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
+    <script async src="main.js"></script>
+    <title>Lesson_15</title>
 </head>
-<body>   
-    <input name="myInput" type="text">
-    <button>Add item's list</button>
+<body>  
+    <h2 class="title">todo list</h2> 
+    <form class="todo-form">
+        <input type="text" class="todo-input">
+        <button class="todo-button" type="submit">
+            <i class="fas fa-plus-square"></i>
+        </button>
+    </form>
+    <div class="todo-container">
+        <ul class="todo-list">
 
-    <script>
-        const button = document.querySelector('button');
-        const input = document.querySelector('[name="myInput"]');
-        const ul = document.createElement("ul");
+        </ul>
+    </div>
 
-        document.body.prepend(ul);        
+    <script type="text/template" id="listTemplate">
+        <div class="todo">
+            <li class="todo-item">{{text}}</li>
+            <button type="button" class="complete-btn"><i class="fas fa-check"></i></button>
+            <button type="button" class="trash-btn"><i class="fas fa-trash"></i></button>
+        </div>
+    </script>  
 
-        button.addEventListener('click', () => {
-            const li = document.createElement('li');
-
-            if (!input.value){
-
-                return;
-            }
-
-            li.innerText = input.value;
-            input.value ='';
-
-            ul.append(li);            
-        })        
-    </script>
 </body>
 </html>
