@@ -31,10 +31,17 @@ function  resetTodoInput() {
 function onTodoListClick(e) {
     const item = e.target;
 
+    removeTodo(item);
+    completeTodo(item);    
+}
+
+function removeTodo(item) {
     if (item.classList.contains('trash-btn')) {
         item.closest('.todo').remove();
     }
+}
 
+function completeTodo(item) {
     if (item.classList.contains('complete-btn')){
         const todo = item.parentElement;
         
