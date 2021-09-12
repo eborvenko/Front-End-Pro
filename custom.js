@@ -33,7 +33,6 @@ function getContact() {
     for (let field of fields) {
         contacts[field.name] = field.value;
     }
-
     return contacts;
 }
 
@@ -44,13 +43,20 @@ function clearForm() {
 }
 
 function addContact(contacts) {
-    const contactsHTML = template
-        .replace('{{nameFirts}}', contacts.nameFirts)
-        .replace('{{nameLast}}', contacts.nameLast)
-        .replace('{{phone}}', contacts.phone);
+    let contactsHTML = template;
+
+    fields.forEach((field) => {
+        let value = getObjectPropertyValueByName(contacts, field.name);
+
+        contactsHTML = contactsHTML.replace("{{" + field.name + "}}", value);
+      });
 
     list.insertAdjacentHTML('beforeend', contactsHTML);
 }
+
+function getObjectPropertyValueByName(obj, propertyName) {
+    return obj[propertyName];
+  }
 
 function isVerification(contacts) {
     return !isEmpty(contacts.nameFirts) 
