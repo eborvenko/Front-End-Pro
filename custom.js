@@ -45,18 +45,12 @@ function clearForm() {
 function addContact(contacts) {
     let contactsHTML = template;
 
-    fields.forEach((field) => {
-        let value = getObjectPropertyValueByName(contacts, field.name);
-
-        contactsHTML = contactsHTML.replace("{{" + field.name + "}}", value);
-      });
+    for (let key in contacts) {
+        contactsHTML = contactsHTML.replace("{{" + key + "}}", contacts[key]);
+    }
 
     list.insertAdjacentHTML('beforeend', contactsHTML);
 }
-
-function getObjectPropertyValueByName(obj, propertyName) {
-    return obj[propertyName];
-  }
 
 function isVerification(contacts) {
     return !isEmpty(contacts.nameFirts) 
