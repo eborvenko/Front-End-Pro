@@ -1,97 +1,58 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 body {
-  background: linear-gradient(80deg, rgb(0, 157, 255), #9005a2);
-  color: white;
-  font-family: "Verdana", "Geneva", sans-serif;
+    font-family: "Montserrat", "Arial", sans-serif;
+    font-style: normal;
+    font-weight: 500;    
 }
 
-.title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 25px;
+.wrap {
+	max-width: 767px;
+	margin: 0 auto;
+	padding: 0 15px;
 }
 
-.todo-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 25px;
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
 }
 
-.todo-input,
-.todo-button {
-  padding: 10px;
-  font-size: 24px;
-  border: none;
-  background: white;
+.table th,
+.table td {
+	padding: 10px;
 }
 
-.todo-button {
-  color: orange;
-  background: white;
-  cursor: pointer;
+.cell-btn {
+	text-align: center;
 }
 
-.todo-button:hover {
-  background: orange;
-  color: white;
+.button {
+	line-height: 28px;
+    text-align: center;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+	padding: 5px 10px;
+    border-radius: 15px;
+	width: 100%;	
 }
 
-.todo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.btn-add {
+	background: green;
+    color: white;
+    border: none;
 }
 
-.todo-list {
-  min-width: 30%;
-  list-style: none;
+.btn-delete {
+	background: red;
+    color: white;
+    border: none;
 }
 
-.todo {
-  margin: 10px;
-  background: white;
-  color: black;
-  font-size: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.todo li {
-  flex: 1;
-}
-
-.trash-btn,
-.complete-btn {
-  background: orange;
-  color: white;
-  border: none;
-  padding: 16px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.complete-btn {
-  background: #03b803;
-}
-
-.todo-item {
-  padding: 0 8px;
-}
-
-.fa-trash,
-.fa-check {
-  pointer-events: none;
-}
-
-.completed {
-  text-decoration: line-through;
-  opacity: 0.7;
+.field {
+	padding: 5px 10px;
+	border-radius: 10px;
 }

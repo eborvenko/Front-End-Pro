@@ -5,36 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
-      crossorigin="anonymous"
-    />
-    <script async src="main.js"></script>
-    <title>Lesson_15</title>
+    <script async src="custom.js"></script>
+    <title>Lesson_13</title>
 </head>
-<body>  
-    <h2 class="title">todo list</h2> 
-    <form class="todo-form">
-        <input type="text" class="todo-input">
-        <button class="todo-button" type="submit">
-            <i class="fas fa-plus-square"></i>
-        </button>
-    </form>
-    <div class="todo-container">
-        <ul class="todo-list">
+<body>    
+    <div class="wrap">
+        <form id="contactsForm" >
+            <table class="table">
+                <caption>Домашняя работа 14. Список контактов</caption>
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Номер телефона</th>
+                        <th>События</th>                    
+                    </tr>
+                </thead>
 
-        </ul>
-    </div>
+                <tbody id="contactsList"></tbody>
 
-    <script type="text/template" id="listTemplate">
-        <div class="todo">
-            <li class="todo-item">{{text}}</li>
-            <button type="button" class="complete-btn"><i class="fas fa-check"></i></button>
-            <button type="button" class="trash-btn"><i class="fas fa-trash"></i></button>
-        </div>
-    </script>  
+                <tfoot>
+                    <td>
+                        <input type="text" class="field" name="nameFirts">
+                    </td>
+                    <td>
+                        <input type="text" class="field" name="nameLast">
+                    </td>
+                    <td>
+                        <input type="text" class="field" name="phone">
+                    </td>
+                    <td class="cell-btn">
+                        <button id="button-add" class="button btn-add">Добавить</button>
+                    </td>
+                </tfoot>
+            </table>
+        </form>       
+    </div>  
+
+    <script type="text/template" id="contactsTemplate">
+    <tr class="contact-row">
+        <td>{{nameFirts}}</td>
+        <td>{{nameLast}}</td>
+        <td>{{phone}}</td>
+        <td class="cell-btn">
+            <button type="button" class="button btn-delete">Удалить</button>
+        </td>
+    </tr>
+    </script>
 
 </body>
-</html>
+</html>   
