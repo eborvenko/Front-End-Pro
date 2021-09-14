@@ -1,46 +1,41 @@
-  function createCalculator(a) {
+function createCalculator(a) {
     let num = a;
 
     return {
         add: (b) => {
-            if (isNaN(b)) {
-
-               return console.log('NaN'); 
+            if (verification(b)) {
+                console.log((num = num + b));
             }
-
-            console.log(num = num + b);
         },
         sub: (b) => {
-            if (isNaN(b)) {
-
-               return console.log('NaN'); 
-            } 
-            
-            console.log(num = num - b);
+            if (verification(b)) {
+                console.log((num = num - b));
+            }
         },
         set: (b) => {
-            if (isNaN(b)) {
-
-                return console.log('NaN'); 
-             } 
-             
-             console.log(num = b);
-        },        
+            if (verification(b)) {
+                console.log((num = b));
+            }
+        },
         get: (b) => console.log(num),
+    };
+}
+
+function verification(b) {
+    if (isNaN(b)) {
+        console.log("NaN");
+        return false;
     }
-  }
-  
-  const calculator = createCalculator(100);
-  
-  calculator.add(10); // 110
-  calculator.add(10); // 120
-  calculator.sub(20); // 100
- 
-  calculator.set(20); //
-  calculator.add(10); // 30
-  calculator.add(10); // 40
-  calculator.add('qwe'); // NaN и значение 40 не менять
-  calculator.get(); // 40
+    return true;
+}
 
+const calculator = createCalculator(100);
 
-
+calculator.add(10); // 110
+calculator.add(10); // 120
+calculator.sub(20); // 100
+calculator.set(20); // 20
+calculator.add(10); // 30
+calculator.add(10); // 40
+calculator.add("qwe"); // NaN и значение 40 не менять
+calculator.get(); // 40
