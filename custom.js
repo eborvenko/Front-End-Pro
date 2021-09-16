@@ -1,35 +1,27 @@
 'use strict';
 
 function Calculator(base) {
+
     this.base = base;
+
     return {
         add: (num) => {
-            if (verification(num)) {
-                console.log(base += num);
-            }
+            return isValidNumber(num) ? base += num : NaN;
         },
         sub: (num) => {
-            if (verification(num)) {
-                console.log(base -= num);
-            }
+            return isValidNumber(num) ? base -= num : NaN;
         },
         set: (num) => {
-            if (verification(num)) {
-                console.log(base = num);
-            }
+            return isValidNumber(num) ? base = num : NaN;
         },
         get: () => {
-            console.log(base);
+            return base;
         }
     };
 }
 
-function verification(num) {
-    if (isNaN(num)) {
-        console.log("NaN");
-        return false;
-    }
-    return true;
+function isValidNumber(num) {
+    return !isNaN(num);
 }
 
 const calculator = new Calculator(100);
