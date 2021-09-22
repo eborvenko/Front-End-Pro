@@ -1,93 +1,39 @@
 'use strict';
 
-function Hamburger(size) {
-    this.size = size;
-    this.toppings = [];
+function Calculator(base) {
+
+    this.base = base;
+
+    return {
+        add: (num) => {
+            return isValidNumber(num) ? base += num : NaN;
+        },
+        sub: (num) => {
+            return isValidNumber(num) ? base -= num : NaN;
+        },
+        set: (num) => {
+            return isValidNumber(num) ? base = num : NaN;
+        },
+        get: () => {
+            return base;
+        }
+    };
 }
 
-Hamburger.prototype.addTopping = function (topping) {
-    !this.toppings.includes(topping)
-        ? this.toppings.push(topping)
-        : this.toppings;
+function isValidNumber(num) {
+    return !isNaN(num);
+}
 
-    return this.toppings[this.toppings.length - 1];
-};
+const calculator = new Calculator(100);
 
-Hamburger.prototype.getPrice = function () {
-    const price =
-        Hamburger.SIZES[this.size].price +
-        this.toppings.reduce(
-            (acc, item) => acc + Hamburger.TOPPINGS[item].price,
-            0
-        );
+calculator.add(10); // 110
+calculator.add(10); // 120
+calculator.sub(20); // 100
+calculator.set(20); // 20
+calculator.add(10); // 30
+calculator.add(10); // 40
+calculator.add("qwe"); // NaN и значение 40 не менять
+calculator.get(); // 40
 
-    return price;
-};
+calculator.base;
 
-Hamburger.prototype.getCallories = function () {
-    const caloriesAmount =
-        Hamburger.SIZES[this.size].calories +
-        this.toppings.reduce(
-            (acc, item) => acc + Hamburger.TOPPINGS[item].calories,
-            0
-        );
-
-    return caloriesAmount;
-};
-
-Hamburger.SIZE_SMALL = 'SIZE_SMALL';
-Hamburger.SIZE_MED = 'SIZE_MED';
-Hamburger.SIZE_LARGE = 'SIZE_LARGE';
-
-Hamburger.SIZES = {
-    [Hamburger.SIZE_SMALL]: {
-        price: 50,
-        calories: 20,
-    },
-    [Hamburger.SIZE_MED]: {
-        price: 75,
-        calories: 30,
-    },
-    [Hamburger.SIZE_LARGE]: {
-        price: 100,
-        calories: 40,
-    },
-};
-
-Hamburger.TOPPING_CHEESE = 'TOPPING_CHEESE';
-Hamburger.TOPPING_SALAD = 'TOPPING_SALAD';
-Hamburger.TOPPING_POTATO = 'TOPPING_POTATO';
-Hamburger.TOPPING_SPICE = 'TOPPING_SPICE';
-Hamburger.TOPPING_SAUCE = 'TOPPING_SAUCE';
-
-Hamburger.TOPPINGS = {
-    [Hamburger.TOPPING_CHEESE]: {
-        price: 10,
-        calories: 20,
-    },
-    [Hamburger.TOPPING_SALAD]: {
-        price: 20,
-        calories: 5,
-    },
-    [Hamburger.TOPPING_POTATO]: {
-        price: 15,
-        calories: 10,
-    },
-    [Hamburger.TOPPING_SPICE]: {
-        price: 15,
-        calories: 0,
-    },
-    [Hamburger.TOPPING_SAUCE]: {
-        price: 20,
-        calories: 5,
-    },
-};
-
-const hamburger = new Hamburger(Hamburger.SIZE_LARGE);
-
-hamburger.addTopping(Hamburger.TOPPING_SAUCE);
-hamburger.addTopping(Hamburger.TOPPING_POTATO);
-hamburger.addTopping(Hamburger.TOPPING_SALAD);
-
-console.log('Price with sauce: ' + hamburger.getPrice());
-console.log('Callories with sauce: ' + hamburger.getCallories());
