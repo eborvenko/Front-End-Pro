@@ -36,3 +36,4 @@ calculator.add("qwe"); // NaN и значение 40 не менять
 calculator.get(); // 40
 
 calculator.base;
+
