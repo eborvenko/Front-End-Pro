@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script defer src="custom.js"></script>
+    <title>Lesson 22</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h3>Homework 23</h3>
+        <h3>GitHub API</h3>
+        
+        <div>
+            <input id="userInput" class="input-user" type="text"> 
+            <button id="searchBtn" class="btn-search">Search</button>
+        </div>
+    
+        <div id="container" class="container-box"></div>
+    </div>
+    <script type="text/template" id="userTemplate">
+        <img src="{{image}}" alt="{{user}}">
+        <div>
+            <div>Login: {{login}}</div>
+            <div>Public-repos: {{public}}</div>
+            <div>Followers: {{followers}}</div>
+            <div>Following: {{following}}</div>
+        </div>
+    </script> 
+    <script type="text/template" id="errorTemplate">
+        <div class="error-text">{{error}}</div>
+    </script>
+</body>
+</html>
