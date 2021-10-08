@@ -55,7 +55,7 @@ function onTodoListClick(e) {
     const todoEl = getTodoElement(e.target);
     const classList = e.target.classList;
 
-    if (e.target.classList.contains(CLASS.BTN_TRASH)) {
+    if (classList.contains(CLASS.BTN_TRASH)) {
         return removeTodo(todoEl);
     }
 
