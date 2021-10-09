@@ -19,6 +19,7 @@ const todoInput =   document.querySelector(SELECTOR.INPUT);
 const todoButton =  document.querySelector(SELECTOR.ADD_BUTTON);
 const todoList =    document.querySelector(SELECTOR.LIST);
 const loading =     document.querySelector(SELECTOR.LOADING);
+const error =       document.querySelector(SELECTOR.ERROR);
 const todoHTML =    document.querySelector(SELECTOR.LIST_TEMPLATE).innerHTML;
 
 todoButton.addEventListener('click', onAddTodoButtonClick);
@@ -31,7 +32,7 @@ function init() {
 
     TodoAPI
         .getList()
-        .then((todoList) => addTodoList(todoList))
+        .then(addTodoList)
         .catch(handleError)
         .finally(toggleLoading);
 }
@@ -55,7 +56,7 @@ function onTodoListClick(e) {
     const todoEl = getTodoElement(e.target);
     const classList = e.target.classList;
 
-    if (classList.contains(CLASS.BTN_TRASH)) {
+    if (e.target.classList.contains(CLASS.BTN_TRASH)) {
         return removeTodo(todoEl);
     }
 
@@ -132,6 +133,6 @@ function toggleLoading() {
 }
 
 function handleError(err) {
-    err.textContent = err.message;
+    error.textContent = err.message;
     setTimeout(() => (err.textContent = ''), 5000);
 }
