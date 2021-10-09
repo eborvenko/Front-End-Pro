@@ -39,7 +39,7 @@ function init() {
     toggleLoading();
 
     TableAPI.getList()
-        .then((tableList) => addTableList(tableList))
+        .then(addTableList)
         .catch(handleError)
         .finally(toggleLoading);
 }
