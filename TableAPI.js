@@ -1,10 +1,10 @@
 'use strict';
 
-class TableAPI {
+class PublicAPI {
     static TOKEN =
         '55f25d8465a78ebd05faff908ef320ea06e6e62cee9f04b53087e6f6e30df63c';
     static URL = 'https://gorest.co.in/public/v1/posts';
-    static USER_ID = 570;
+    static USER_ID = 532;
     static HEADERS = {
         'Accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF-8',

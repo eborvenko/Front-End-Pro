@@ -3,11 +3,11 @@ const SELECTOR = Object.freeze({
     INPUT_BODY: '.public-body',
     ROW: '.public-row',
     LIST: '.publicsList',
-    ROW_TEMPLATE: '#publicsTemplate',
-    ERROR: '#error',
+    ROW_TEMPLATE: '#publicsTemplate',    
     BTN_ADD: '#button-add',
     BTN_SAVE: '#button-save',
     LOADING: '#loading',
+    ERROR: '#error',
 });
 
 const CLASS = Object.freeze({
@@ -29,96 +29,96 @@ const templateHTML = document.querySelector(SELECTOR.ROW_TEMPLATE).innerHTML;
 
 const updateInfo = {};
 
-btnAdd.addEventListener('click', onPublicAddClick);
-btnSave.addEventListener('click', onPublicSaveClick);
-tableField.addEventListener('click', onPublicsListClick);
+btnAdd.addEventListener('click', onPostAddClick);
+btnSave.addEventListener('click', onPostSaveClick);
+tableField.addEventListener('click', onPostsListClick);
 
 init();
 
 function init() {
     toggleLoading();
 
-    TableAPI.getList()
+    PublicAPI.getList()
         .then(addTableList)
         .catch(handleError)
         .finally(toggleLoading);
 }
 
 function addTableList(list) {
-    const html = list.map((tableItem) => getTableHTML(tableItem)).join('');
+    const html = list.map((postItem) => getTableHTML(postItem)).join('');
 
     tableField.innerHTML = html;
 }
 
-function getTableHTML(tableItem) {
+function getTableHTML(postItem) {
     return templateHTML
-        .replace('{{publicID}}', tableItem.id)
-        .replace('{{public_ID}}', tableItem.id)
-        .replace('{{publicTitle}}', tableItem.title)
-        .replace('{{publicBody}}', tableItem.body);
+        .replace('{{publicRowID}}', postItem.id)
+        .replace('{{public_ID}}', postItem.id)
+        .replace('{{publicTitle}}', postItem.title)
+        .replace('{{publicBody}}', postItem.body);
 }
 
-function onPublicAddClick(e) {
+function onPostAddClick(e) {
     e.preventDefault();
 
-    const publics = getPublic();
+    const posts = getPost();
 
-    if (!isVerification(publics)) {
+    if (!isVerification(posts)) {
         alert('Поля пустые или заполнены неверно!');
 
         return false;
     }
 
-    addPublic(publics);
+    addPost(posts);
     clearForm();
 }
 
-function getPublic() {
+function getPost() {
     return {
         title: titleCell.value,
         body: bodyCell.value,
     };
 }
 
-function onPublicsListClick(e) {
-    const publicEl = getPublicElement(e.target);
+function onPostsListClick(e) {
+    const postEl = getPostElement(e.target);
     const classList = e.target.classList;
 
     if (classList.contains(CLASS.BTN_DELETE)) {
-        return removePublic(publicEl);
+        return removePost(postEl);
     }
 
     if (classList.contains(CLASS.BTN_EDIT)) {
         btnAdd.classList.add(CLASS.HIDE);
         btnSave.classList.remove(CLASS.HIDE);
 
-        TableAPI.getOne(+publicEl.dataset.id).then((tableList) => {
-            return getUpdateEl(tableList);
+        PublicAPI.getOne(+postEl.dataset.id).then((postList) => {
+            return getUpdateEl(postList);
         });
     }
 }
 
-function getUpdateEl(tableList) {
-    titleCell.value = tableList.title;
-    bodyCell.value = tableList.body;
+function getUpdateEl(postList) {
+    titleCell.value = postList.title;
+    bodyCell.value = postList.body;
 
     Object.assign(
         updateInfo,
-        { id: tableList.id },
+        { id: postList.id },
         { title: titleCell.value },
         { body: bodyCell.value }
     );
 }
 
-function updatePublic() {
+function updatePost() {
     return {
         title: titleCell.value,
         body: bodyCell.value,
     };
 }
 
-function onPublicSaveClick() {
-    Object.assign(updateInfo, updatePublic());
+function onPostSaveClick() {
+    Object.assign(updateInfo, updatePost());
 
     title = updateInfo.title;
     body = updateInfo.body;
@@ -129,33 +129,33 @@ function onPublicSaveClick() {
         return false;
     }
 
-    TableAPI.update(updateInfo.id, { title, body })
+    PublicAPI.update(updateInfo.id, { title, body })
         .then((data) => data.id)
-        .then(() => TableAPI.getList())
+        .then(() => PublicAPI.getList())
         .then(addTableList)
         .catch(handleError);
 }
 
-function removePublic(item) {
+function removePost(item) {
     item.remove();
 
-    TableAPI.delete(+item.dataset.id).catch(handleError);
+    PublicAPI.delete(+item.dataset.id).catch(handleError);
 }
 
-function getPublicElement(target) {
+function getPostElement(target) {
     return target.closest(SELECTOR.ROW);
 }
 
-function addPublic(public) {
-    TableAPI.create(public)
+function addPost(post) {
+    PublicAPI.create(post)
         .then((data) => data.id)
-        .then(() => TableAPI.getList())
+        .then(() => PublicAPI.getList())
         .then(addTableList)
         .catch(handleError);
 }
 
-function isVerification(public) {
-    return !isEmpty(public.title) && !isEmpty(public.body);
+function isVerification(post) {
+    return !isEmpty(post.title) && !isEmpty(post.body);
 }
 
 function clearForm() {
