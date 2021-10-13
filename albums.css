@@ -61,6 +61,11 @@ body {
     text-indent: 0;
 }
 
+#loading {
+    padding: 10px;
+    color: white;
+}
+
 .hide {
     display: none;
 }
