@@ -21,9 +21,9 @@ $(() => {
             deleteSticker(itemId);
         })
         .on('focusout', STICKER_ITEM, function () {
-            let itemId = $(this).parent(ITEM_LI_SELECTOR).attr(ATTR_DATA_ID);
-            let description = $(this).val();
-            let sticker = { id: itemId, description: description };
+            let $itemId = $(this).parent(ITEM_LI_SELECTOR).attr(ATTR_DATA_ID);
+            let $description = $(this).val();
+            let sticker = { id: $itemId, description: $description };
 
             saveSticker(sticker);
         });
@@ -90,7 +90,6 @@ $(() => {
     }
 
     function saveSticker(sticker) {
-        StickerAPI.update(sticker.id, sticker)
-            .then((resp) => resp.json);
+        StickerAPI.update(sticker.id, sticker);
     }
 });
