@@ -1,9 +1,9 @@
-$(() => {    
+$(() => {
     const STICKER_LIST = '#sticker-list';
     const STICKER_TEMPLATE = '#sticker-item-template';
     const STICKER_ITEM = '.sticker-item-input';
     const DELETE_BTN_CLASS = '.delete-btn';
-    const ITEM_LI_SELECTOR = 'li';    
+    const ITEM_LI_SELECTOR = 'li';
     const ATTR_DATA_ID = 'data-id';
 
     const $stickerTemplate = $(STICKER_TEMPLATE).html();
@@ -15,23 +15,28 @@ $(() => {
     $addTicket.on('click', onAddStickerClick);
 
     $stickerList
-        .on('click', DELETE_BTN_CLASS, function () {
-            let itemId = $(this).parent(ITEM_LI_SELECTOR).attr(ATTR_DATA_ID);
+        .on('click', DELETE_BTN_CLASS, onDeleteClick)
+        .on('focusout', STICKER_ITEM, onStickerFocusout);
 
-            deleteSticker(itemId);
-        })
-        .on('focusout', STICKER_ITEM, function () {
-            let $itemId = $(this).parent(ITEM_LI_SELECTOR).attr(ATTR_DATA_ID);
-            let $description = $(this).val();
-            let sticker = { id: $itemId, description: $description };
+    function onDeleteClick() {
+        let itemId = $(this).closest(ITEM_LI_SELECTOR).data('id');
 
-            saveSticker(sticker);
-        });
+        deleteSticker(itemId);
+    }
+
+    function onStickerFocusout() {
+        let $itemId = $(this).closest(ITEM_LI_SELECTOR).data('id');
+        let $description = $(this).val();
+        let sticker = { id: $itemId, description: $description };
+
+        saveSticker(sticker);
+    }
 
     function deleteSticker(id) {
         StickerAPI.delete(id).then(() => {
             stickersArr = stickersArr.filter((item) => item.id !== id);
             renderList(stickersArr);
+            fetchSticker();
         });
     }
 
@@ -48,9 +53,7 @@ $(() => {
     }
 
     function fetchSticker() {
-        StickerAPI.getList()
-            .then(setStickers)
-            .then(renderList);
+        StickerAPI.getList().then(setStickers).then(renderList);
     }
 
     function setStickers(data) {
@@ -78,9 +81,7 @@ $(() => {
     }
 
     function createSticker(newSticker) {
-        StickerAPI.create(newSticker)
-            .then(addSticker)
-            .then(fetchSticker);
+        StickerAPI.create(newSticker).then(addSticker).then(fetchSticker);
     }
 
     function addSticker(sticker) {

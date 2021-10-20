@@ -1,6 +1,8 @@
 $(() => {
     const DELETE_BTN_CLASS = '.delete-btn';
     const TEXTAREA_CLASS = '.sticker-item-input';
+    const ETMPY_ITEM = { description: '' };
+    const STICKER_ITEM = '.sticker-item';
 
     const $stickerItemTemplate = $('#sticker-item-template').html();
     const $addStickerTicketBtn = $('.button-add');
@@ -10,13 +12,13 @@ $(() => {
 
     $addStickerTicketBtn.on('click', onAddTicketBtnClick);
     $stickerList
-        .on('click', DELETE_BTN_CLASS, onStickerListClick)
-        .on('blur', TEXTAREA_CLASS, onTicketBlur);
+        .on('click', DELETE_BTN_CLASS, onStickerDelClick)
+        .on('focusout', TEXTAREA_CLASS, onTicketFocus);
 
     init();
 
-    function onTicketBlur() {
-        let $tiketId = $(this).parent().data('id');
+    function onTicketFocus() {
+        let $tiketId = $(this).closest(STICKER_ITEM).data('id');
         let $newDescription = $(this).val();
 
         updateTicket($tiketId, $newDescription);
@@ -42,28 +44,8 @@ $(() => {
         addTicket();
     }
 
-    function onStickerListClick() {
-        let $tiketId = $(this).parent().data('id');
-
-        $(this).parent().remove();
-
-        deleteTicket($tiketId);
-    }
-
-    function init() {
-        getStickerList();
-    }
-
-    function deleteTicket(id) {
-        StickerAPI.delete(id);
-    }
-
     function addTicket() {
-        const stickerItem = {
-            description: '',
-        };
-
-        addTicketOnServer(stickerItem);
+        addTicketOnServer(ETMPY_ITEM); ///
     }
 
     function addTicketOnServer(stickerItem) {
@@ -90,5 +72,21 @@ $(() => {
             .replace('{{inner}}', stickerItem.description);
 
         $(html).appendTo($stickerList);
+    }
+
+    function onStickerDelClick() {
+        let $tiketId = $(this).closest(STICKER_ITEM).data('id');
+
+        $(this).closest(STICKER_ITEM).remove();
+
+        deleteTicket($tiketId);
+    }
+
+    function init() {
+        getStickerList();
+    }
+
+    function deleteTicket(id) {
+        StickerAPI.delete(id);
     }
 });
