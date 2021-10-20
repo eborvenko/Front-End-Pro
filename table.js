@@ -3,7 +3,7 @@ const SELECTOR = Object.freeze({
     INPUT_BODY: '.public-body',
     ROW: '.public-row',
     LIST: '.publicsList',
-    ROW_TEMPLATE: '#publicsTemplate',    
+    ROW_TEMPLATE: '#publicsTemplate',
     BTN_ADD: '#button-add',
     BTN_SAVE: '#button-save',
     LOADING: '#loading',
@@ -27,7 +27,7 @@ const btnAdd = document.querySelector(SELECTOR.BTN_ADD);
 const btnSave = document.querySelector(SELECTOR.BTN_SAVE);
 const templateHTML = document.querySelector(SELECTOR.ROW_TEMPLATE).innerHTML;
 
-const updateInfo = {};
+let updateInfo = {};
 
 btnAdd.addEventListener('click', onPostAddClick);
 btnSave.addEventListener('click', onPostSaveClick);
@@ -102,24 +102,25 @@ function getUpdateEl(postList) {
     titleCell.value = postList.title;
     bodyCell.value = postList.body;
 
-    Object.assign(
-        updateInfo,
-        { id: postList.id },
-        { title: titleCell.value },
-        { body: bodyCell.value }
-    );
+    updateInfo = {
+        id: postList.id,
+        title: titleCell.value,
+        body: bodyCell.value,
+    };
 }
 
-function updatePost() {
+function updatePost(id) {
     return {
+        id: id,
         title: titleCell.value,
         body: bodyCell.value,
     };
 }
 
 function onPostSaveClick() {
-    Object.assign(updateInfo, updatePost());
+    updateInfo = updatePost(updateInfo.id);
 
+    id = updateInfo.id;
     title = updateInfo.title;
     body = updateInfo.body;
 
@@ -129,8 +130,7 @@ function onPostSaveClick() {
         return false;
     }
 
-    PublicAPI.update(updateInfo.id, { title, body })
-        .then((data) => data.id)
+    PublicAPI.update(id, { title, body })
         .then(() => PublicAPI.getList())
         .then(addTableList)
         .catch(handleError);
