@@ -1,22 +1,13 @@
 'use strict';
 
 class StickerAPI {
-    static TOKEN =
-        '55f25d8465a78ebd05faff908ef320ea06e6e62cee9f04b53087e6f6e30df63c';
     static URL = 'https://5dd3d5ba8b5e080014dc4bfa.mockapi.io/stickers';
-    static HEADERS = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': `Bearer ${this.TOKEN}`,
-    };
 
     static request(uri, method, data) {
         return fetch(`${this.URL}${uri}`, {
             method,
             headers: {
-                'Accept': 'application/json',
                 'Content-type': 'application/json; charset=UTF-8',
-                'Authorization': `Bearer ${this.TOKEN}`,
             },
             body: data ? JSON.stringify(data) : undefined,
         });
