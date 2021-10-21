@@ -2,7 +2,7 @@
 
 class PublicAPI {
     static TOKEN =
-        '55f25d8465a78ebd05faff908ef320ea06e6e62cee9f04b53087e6f6e30df63c';
+        '0ff22eed2f054667c237f86184297f6685c08d981cc8776ec64798fa22fceb33';
     static URL = 'https://gorest.co.in/public/v1/posts';
     static USER_ID = 532;
     static HEADERS = {
