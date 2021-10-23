@@ -28,7 +28,7 @@ const $modal = $(SELECTOR.MODAL_FORM).dialog({
     modal: true,
     buttons: {
         Save: () => {
-            savePost();           
+            savePost();
         },
         Cancel: closeModal,
     },
@@ -60,9 +60,9 @@ function savePost() {
 
 function getList() {
     PublicAPI.getList()
-      .then(setData)
-      .then(renderList)
-      .catch(handleError);
+        .then(setData)
+        .then(renderList)
+        .catch(handleError);
 }
 
 function setData(data) {
@@ -93,7 +93,7 @@ function openModal(post) {
 }
 
 function setModalPost(post) {
-    if (post.id !== undefined) {
+    if (post.id) {
         $form.postId.value = post.id;
         $form.title.value = post.title;
         $form.body.value = post.body;
@@ -147,7 +147,7 @@ function updatePost(id, changes) {
 
     Object.keys(changes).forEach((key) => (post[key] = changes[key]));
     PublicAPI.update(id, post)
-        .catch(handleError);    
+        .catch(handleError);
 }
 
 function onDeleteClick(e) {

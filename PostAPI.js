@@ -4,7 +4,7 @@ class PublicAPI {
     static TOKEN =
         '0ff22eed2f054667c237f86184297f6685c08d981cc8776ec64798fa22fceb33';
     static URL = 'https://gorest.co.in/public/v1/posts';
-    static USER_ID = 532;
+    static USER_ID = 431;
 
     static request(uri = '', method = 'GET', data) {
         return fetch(`${this.URL}${uri}`, {
