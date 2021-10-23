@@ -1,0 +1,16 @@
+body {
+margin:  auto 35px;
+}
+
+.done {
+    background: #07b507;
+}
+
+.delete-btn {
+    cursor: pointer;
+}
+
+.todo-button {
+    cursor: pointer;
+   
+}
