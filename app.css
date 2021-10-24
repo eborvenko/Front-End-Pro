@@ -6,7 +6,8 @@ margin:  auto 35px;
     background: #07b507;
 }
 
-.delete-btn {
+.delete-btn,
+.edit-btn {
     cursor: pointer;
 }
 
