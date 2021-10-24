@@ -5,11 +5,6 @@ class TodoAPI {
         '0ff22eed2f054667c237f86184297f6685c08d981cc8776ec64798fa22fceb33';
     static URL = 'https://gorest.co.in/public/v1/todos';
     static USER_ID = 778;
-    static HEADERS = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': `Bearer ${this.TOKEN}`,
-    };
 
     static request(uri, method, data) {
         return fetch(`${this.URL}${uri}`, {
