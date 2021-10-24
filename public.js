@@ -134,19 +134,23 @@ function getModalPost() {
 function onEditButtonClick(e) {
     const $input = $(this);
     const id = getElementIndex($input);
-    const post = postsList.find((item) => +item.id === id);
+    const post = getFindPost(id);
 
     openModal(post);
 }
 
 function updatePost(id, changes) {
-    const post = postsList.find((el) => el.id == id);
+    const post = getFindPost(+id)
 
     Object.keys(changes).forEach((key) => (post[key] = changes[key]));
 
     PublicAPI.update(id, post).catch(handleError);
 
     updateOnUi(post);
+}
+
+function getFindPost(id) {
+    return postsList.find((item) => item.id === id)
 }
 
 function updateOnUi(post) {
