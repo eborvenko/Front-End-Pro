@@ -1,7 +1,7 @@
 class TodoListView {
     static TODO_ITEM_SELECTOR = '.todo-item';
     static DELETE_BTN_SELECTOR = '.delete-btn';
-    static EDIT_BTN_SELECTOR = '.edit-btn';
+    static DONE_BTN_SELECTOR = '.done-btn';
 
 
     #listEl;
@@ -15,10 +15,10 @@ class TodoListView {
     init() {
         return $(`<ul class="todo-list"></ul>`)
             .on('click', TodoListView.DELETE_BTN_SELECTOR, (e) => this.onDeleteBtnClick(e))
-            .on('click', TodoListView.EDIT_BTN_SELECTOR, (e) => this.onTodoListClick(e))
+            .on('click', TodoListView.DONE_BTN_SELECTOR, (e) => this.onDoneBtnClick(e))
     }
 
-    onTodoListClick(e) {
+    onDoneBtnClick(e) {
         const id = this.getTodoItemId(e.target);
 
         this.#options.onToggle(id);
@@ -50,7 +50,7 @@ class TodoListView {
         return `
         <li class="todo-item ${statusClass}" data-id='${todo.id}'>
             ${todo.title}
-            <span class="edit-btn">✔</span>
+            <span class="done-btn">✔</span>
             <span class="delete-btn">✘</span>
         </li>
         `;
