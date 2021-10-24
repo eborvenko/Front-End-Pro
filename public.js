@@ -7,9 +7,17 @@ const SELECTOR = Object.freeze({
     MODAL_FORM: '#modal-form',
     BTN_DELETE: '.btn-delete',
     BTN_EDIT: '.btn-edit',
+    TITLE: '.table-title',
+    BODY: '.table-body',
 });
 
 let postsList = [];
+
+const POST_DATA = {
+    id: '',
+    title: '',
+    body: '',
+};
 
 const error = $(SELECTOR.ERROR);
 const templateHTML = $(SELECTOR.ROW_TEMPLATE).html();
@@ -44,11 +52,17 @@ function init() {
 function onPostAddClick(e) {
     e.preventDefault();
 
-    openModal('');
+    openModal(POST_DATA);
 }
 
 function savePost() {
     const post = getModalPost();
+
+    if (!isVerification(post)) {
+        alert('Поля пустые!');
+
+        return false;
+    }
 
     if (post.id) {
         updatePost(post.id, post);
@@ -59,10 +73,7 @@ function savePost() {
 }
 
 function getList() {
-    PublicAPI.getList()
-        .then(setData)
-        .then(renderList)
-        .catch(handleError);
+    PublicAPI.getList().then(setData).then(renderList).catch(handleError);
 }
 
 function setData(data) {
@@ -93,20 +104,12 @@ function openModal(post) {
 }
 
 function setModalPost(post) {
-    if (post.id) {
-        $form.postId.value = post.id;
-        $form.title.value = post.title;
-        $form.body.value = post.body;
-    }
+    $form.postId.value = post.id;
+    $form.title.value = post.title;
+    $form.body.value = post.body;
 }
 
 function addPost(post) {
-    if (!isVerification(post)) {
-        alert('Поля пустые!');
-
-        return false;
-    }
-
     PublicAPI.create(post)
         .then((post) => {
             postsList.push(post);
@@ -139,29 +142,31 @@ function onEditButtonClick(e) {
 function updatePost(id, changes) {
     const post = postsList.find((el) => el.id == id);
 
-    if (!isVerification(changes)) {
-        alert('Поля пустые!');
-
-        return false;
-    }
-
     Object.keys(changes).forEach((key) => (post[key] = changes[key]));
-    PublicAPI.update(id, post)
-        .catch(handleError);
+
+    PublicAPI.update(id, post).catch(handleError);
+
+    updateOnUi(post);
+}
+
+function updateOnUi(post) {
+    const $item = getPostElementById(post.id);
+
+    $item.find(SELECTOR.TITLE)[0].textContent = post.title;
+    $item.find(SELECTOR.BODY)[0].textContent = post.body;
 }
 
 function onDeleteClick(e) {
-    const $element = $(this).parent();
+    const $element = $(e.target);
 
-    $element.fadeOut(1000, () => deletePost(getElementIndex($element)));
+    deletePost(getElementIndex($element));
 }
 
 function deletePost(id) {
     postsList = postsList.filter((el) => el.id != id);
 
     deletePostElement(id);
-    PublicAPI.delete(id)
-        .catch(handleError);
+    PublicAPI.delete(id).catch(handleError);
 }
 
 function deletePostElement(id) {
