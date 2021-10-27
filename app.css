@@ -1,0 +1,25 @@
+body {
+margin:  auto 35px;
+}
+
+.done {
+    background: #07b507;
+}
+
+.delete-btn,
+.done-btn {
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    color: red;
+}
+
+.done-btn:hover {
+    color: orange;
+}
+
+.todo-button {
+    cursor: pointer;
+   
+}
