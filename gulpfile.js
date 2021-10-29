@@ -3,6 +3,7 @@ const concat = require('gulp-concat');
 const clean = require('gulp-clean');
 const watch = require('gulp-watch');
 const uglify = require('gulp-uglify');
+const uglifycss = require('gulp-uglifycss');
 const minifyCss = require('gulp-minify-css');
 
 function cleanDist() {
@@ -10,17 +11,7 @@ function cleanDist() {
 }
 
 function copyJs() {
-    return src([
-        './src/scripts/api.js',
-
-        './src/scripts/index.js',
-        // './src/scripts/model/*.js',
-        // './src/scripts/view/View.js',
-        // './src/scripts/view/TodoListView.js',
-        // './src/scripts/view/TodoFormView.js',
-        // './src/scripts/controller.js',
-        // './src/scripts/index.js',
-    ])
+    return src(['./src/scripts/api.js', './src/scripts/index.js'])
         .pipe(concat('app.js'))
         .pipe(uglify())
         .pipe(dest('./dist'));
@@ -33,21 +24,10 @@ function copyVendorJs() {
 }
 
 function copyCss() {
-    return (
-        src([
-            './src/styles/style.css',
-            // './src/scripts/TodoApp.js',
-            // './src/scripts/model/*.js',
-            // './src/scripts/view/View.js',
-            // './src/scripts/view/TodoListView.js',
-            // './src/scripts/view/TodoFormView.js',
-            // './src/scripts/controller.js',
-            // './src/scripts/index.js',
-        ])
-            .pipe(concat('app.css'))
-            // .pipe(uglify())
-            .pipe(dest('./dist'))
-    );
+    return src(['./src/style.css'])
+        .pipe(concat('app.css'))
+        .pipe(uglifycss())
+        .pipe(dest('./dist'));
 }
 
 function copyVendorCss() {
@@ -72,7 +52,10 @@ function watchFiles() {
 }
 
 module.exports = {
-    build: series(cleanDist, parallel(copyHtml, copyJs, copyVendorJs, copyCss, copyVendorCss)),
+    build: series(
+        cleanDist,
+        parallel(copyHtml, copyJs, copyVendorJs, copyCss, copyVendorCss)
+    ),
     serve: series(
         cleanDist,
         parallel(copyHtml, copyJs, copyVendorJs, copyCss, copyVendorCss),
