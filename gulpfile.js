@@ -11,7 +11,8 @@ function cleanDist() {
 }
 
 function copyJs() {
-    return src(['./src/scripts/api.js', './src/scripts/index.js'])
+    return src(['./src/scripts/api.js', 
+                './src/scripts/index.js'])
         .pipe(concat('app.js'))
         .pipe(uglify())
         .pipe(dest('./dist'));
