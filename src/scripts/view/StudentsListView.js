@@ -54,7 +54,6 @@ class StudentsListView {
         const $marks = $(el).find(StudentsListView.MARKS_SELECTOR);
         const marks = $($marks)
             .map(function () {
-
                 return $(this).val();
             })
             .get();

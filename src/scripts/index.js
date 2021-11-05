@@ -1,5 +1,5 @@
-'use strict'
+'use strict';
 
 $(() => {
-    new Controller($('#root'))
-})
+    new Controller($('#root'));
+});

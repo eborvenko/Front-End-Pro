@@ -10,7 +10,6 @@ class Controller {
             onDelete: (id) => this.deleteStudent(id),
         });
 
-        
         this.newStudent = new NewStudentFormView({
             onSave: (el) => this.saveStudent(el),
         });

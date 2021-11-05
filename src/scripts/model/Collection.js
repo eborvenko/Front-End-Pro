@@ -1,6 +1,5 @@
 class Collection {
-    constructor(url) {
-        this._url = url;
+    constructor() {
         this._list = [];
     }
 
