@@ -41,17 +41,17 @@ const bCylinder = volumeCurrying(100)(20)(90);
 
 alert('second function ' + bCylinder);
 
-// task-3 Оператора нулевого слияния
+// // task-3 Оператора нулевого слияния
 
-const nullValue = null;
-const emptyText = '';
-const someNumber = 0;
-const valA = nullValue ?? 'default for A';
-const valB = emptyText ?? 'default for B';
-const valC = someNumber || 1;
-const valD = someNumber ?? null;
+// const nullValue = null;
+// const emptyText = '';
+// const someNumber = 0;
+// const valA = nullValue ?? 'default for A';
+// const valB = emptyText ?? 'default for B';
+// const valC = someNumber || 1;
+// const valD = someNumber ?? null;
 
-console.log(valA); //default for A
-console.log(valB); // ""
-console.log(valC); // 1
-console.log(valD); // 0
+// console.log(valA); //default for A
+// console.log(valB); // ""
+// console.log(valC); // 1
+// console.log(valD); // 0
