@@ -29,7 +29,7 @@ const aCylinder = volume(100, 20, 90); // 180000
 
 alert('first function ' + aCylinder);
 
-function volumeCurring(l) {
+function volumeCurrying(l) {
     return (w) => {
         return (h) => {
             return l * w * h;
@@ -37,7 +37,7 @@ function volumeCurring(l) {
     };
 }
 
-const bCylinder = volumeCurring(100)(20)(90);
+const bCylinder = volumeCurrying(100)(20)(90);
 
 alert('second function ' + bCylinder);
 
