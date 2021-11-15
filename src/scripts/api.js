@@ -14,22 +14,24 @@ class API {
         });
     }
 
-    static getList() {
-        return this.request('', 'GET').then((res) => res.json());
+    static async getList() {
+        const res = await this.request('', 'GET');
+        return await res.json();
     }
 
-    static delete(id) {
-        return this.request(`/${id}`, 'DELETE').then((res) => res.json());
+    static async delete(id) {
+        const res = await this.request(`/${id}`, 'DELETE');
+        return await res.json();
     }
 
-    static create(data) {
-        return this.request('', 'POST', { ...data }).then((res) => res.json());
+    static async create(data) {
+        const res = await this.request('', 'POST', { ...data });
+        return await res.json();
     }
 
-    static update(id, data) {
-        return this.request(`/${id}`, 'PUT', { ...data }).then((res) =>
-            res.json()
-        );
+    static async update(id, data) {
+        const res = await this.request(`/${id}`, 'PUT', { ...data });
+        return await res.json();
     }
 }
 
