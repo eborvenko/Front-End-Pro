@@ -1,0 +1,16 @@
+#root {
+    display: block;
+    width: 600px;
+    margin: 15em auto;
+}
+#addMessageBtn {
+    display: block;
+    margin: 2em auto;
+}
+#message_form {
+    margin: auto;
+    width: 23em;
+}
+.message {
+    margin-left: 14em;
+}
